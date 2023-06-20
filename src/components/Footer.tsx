@@ -22,8 +22,8 @@ export default function Footer({}: Props) {
             everyday essentials made.
           </p>
           <div className="flex flex-wrap gap-5">
-            {socials.map(social => (
-              <div className="aspect-square rounded-md bg-gray-300 h-12 flex justify-center items-center">
+            {socials.map((social,idx) => (
+              <div key={idx} className="aspect-square rounded-md bg-gray-300 h-12 flex justify-center items-center">
                 {social.icon}
               </div>
             ))}

@@ -12,9 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${sora.className} min-h-screen grid grid-rows-[auto_1fr_auto]`}>
+      <body className={`${sora.className} min-h-screen grid grid-rows-[auto_1fr_auto] relative overflow-x-hidden overflow-y-auto`}>
         <Header />
-        <main>{children}</main>
+        <main className="bg-zinc-100 sm:bg-zinc-50">{children}</main>
         <Footer />
       </body>
     </html>
