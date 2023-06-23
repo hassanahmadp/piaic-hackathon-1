@@ -5,7 +5,7 @@ type Props = {}
 
 export default function NewsLetter({}: Props) {
   return (
-    <div className="flex flex-col text-center relative justify-center items-center h-[60vh] min-h-[40rem] overflow-hidden">
+    <div className="flex flex-col text-center relative justify-center items-center h-[20rem] overflow-hidden">
       <div className="absolute top-1/2 left-1/2 font-extrabold text-9xl -translate-x-1/2 -translate-y-1/2 text-gray-200">
         Newsletter
       </div>

@@ -13,7 +13,7 @@ export default function Products({}: Props) {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8 justify-center items-center">
           {/* <div className='flex flex-wrap gap-4 justify-center items-center'> */}
           {dummyProducts.slice(0, 3).map((product: Product) => (
-            <div className="transition-all duration-500 scale" key={product.id}>
+            <div className="transition-all duration-500 hover:scale-110" key={product.id}>
               <SingleProduct {...product} />
             </div>
           ))}
