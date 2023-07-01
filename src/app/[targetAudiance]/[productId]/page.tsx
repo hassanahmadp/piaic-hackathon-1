@@ -1,10 +1,12 @@
 "use client"
 import { capitalizeString } from "@/constants/utils"
-import { dummyProducts } from "@/constants"
 import Image from "next/image"
 import React, { useState } from "react"
 import { ProductOverview } from "@/components"
 import QuantityCounter from "@/components/ProductPage/QuantityCounter"
+import { AppDispatch, useAppSelector } from "@/store/store"
+import { useDispatch } from "react-redux"
+import { addToCart } from "@/store/features"
 
 type Props = {
   params: {
@@ -13,12 +15,26 @@ type Props = {
 }
 
 export default function page({ params: { productId } }: Props) {
-  const product = dummyProducts.find(prod => prod.id === productId)
+  const allProducts = useAppSelector(state => state.ProductReducer)
+  const dispatch = useDispatch<AppDispatch>()
+
+  const product = allProducts.find(prod => prod.id === productId)
   const [currentImage, setCurrentImage] = useState<string>(product?.images[0] || "")
-  const [selectedSize, setSelectedSize] = useState("")
+  const [selectedSize, setSelectedSize] = useState<Sizes | "">(product?.sizes[0] || "")
   const [quantity, setQuantity] = useState<number>(1)
 
-  
+  const addToCartHandler = () => {
+    // @ts-ignore
+    dispatch(addToCart({ item: { ...product, quantity, size: selectedSize, deliveryDays: 5 } }))
+  }
+
+  const quantityHandler = (type: "inc" | "dec") => {
+    if (type === "inc") {
+      setQuantity(prev => (prev === 900 ? 900 : prev + 1))
+    } else {
+      setQuantity(prev => (prev === 1 ? 1 : prev - 1))
+    }
+  }
 
   return (
     <>
@@ -69,10 +85,13 @@ export default function page({ params: { productId } }: Props) {
           </div>
           <div className="flex gap-10 flex-wrap justify-center sm:justify-start items-center">
             <span className="hidden sm:inline pb-5 sm:pb-0">Quantity:</span>
-            <QuantityCounter quantity={quantity} setQuantity={setQuantity}/>
+            <QuantityCounter quantity={quantity} handler={quantityHandler} />
           </div>
           <div className="flex gap-4 py-5 font-bold justify-center items-center w-full sm:w-[60%]">
-            <button className="flex-auto sm:flex-auto bg-stone-800 hover:bg-white py-2 text-sm border-black border-2 transition-all duration-200 text-white hover:text-stone-800">
+            <button
+              className="flex-auto sm:flex-auto bg-stone-800 hover:bg-white py-2 text-sm border-black border-2 transition-all duration-200 text-white hover:text-stone-800"
+              onClick={addToCartHandler}
+            >
               Add to Cart
             </button>
             <h3 className="flex-auto sm:flex-auto text-2xl">${product?.price}</h3>

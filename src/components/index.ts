@@ -10,10 +10,13 @@ import MobileMenu from "./MobileMenu"
 import { SingleProduct } from "./ProductListing/SingleProduct"
 import ProductOverview from "./ProductPage/ProductOverview"
 import QuantityCounter from "./ProductPage/QuantityCounter"
+import SizeSelect from "./ProductPage/SizeSelect"
 import SearchBar from "./SearchBar"
+import CartIconButton from "./common/CartIconButton"
 export * from "./ui"
 
 export {
+  CartIconButton,
   SingleProduct,
   Header,
   Footer,
@@ -27,4 +30,5 @@ export {
   Products,
   Promotions,
   Uniqueness,
+  SizeSelect
 }

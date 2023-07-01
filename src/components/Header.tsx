@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar"
 import { LucideShoppingCart } from "lucide-react"
 import MobileMenu from "./MobileMenu"
 import { navLinks } from "@/constants"
+import CartIconButton from "./common/CartIconButton"
 
 type Props = {}
 
@@ -24,25 +25,9 @@ export default function Header({}: Props) {
           ))}
         </div>
         <SearchBar />
-        <Link
-          className="ml-auto hidden lg:flex justify-center items-center bg-zinc-300 h-10 rounded-full transition-transform duration-300 aspect-square hover:scale-110 relative"
-          href="/cart"
-        >
-          <div className="pointer-events-none h-5 absolute top-0 right-0 bg-red-600 aspect-square text-white text-xs flex justify-center items-center rounded-full">
-            {cartCount > 9 ? "9+" : cartCount}
-          </div>
-          <LucideShoppingCart width={17} />
-        </Link>
+        <CartIconButton className="hidden lg:flex"/>
         <div className="flex lg:hidden justify-center items-center gap-3">
-          <Link
-            className="ml-auto flex justify-center items-center bg-zinc-300 h-10 rounded-full transition-transform duration-300 aspect-square hover:scale-110 relative"
-            href="/cart"
-          >
-            <div className="pointer-events-none h-5 absolute top-0 right-0 bg-red-600 aspect-square text-white text-xs flex justify-center items-center rounded-full">
-              {cartCount > 9 ? "9+" : cartCount}
-            </div>
-            <LucideShoppingCart width={17} />
-          </Link>
+          <CartIconButton className="flex lg:hidden"/>
           <MobileMenu />
         </div>
       </div>
