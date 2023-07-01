@@ -46,7 +46,7 @@ export default function CartPage({}: Props) {
               <h2 className="font-bold text-xl mb-5">Order Summary</h2>
               <div className="flex flex-col gap-4">
                 <div className="flex justify-between">
-                  <span>Quantiy</span>
+                  <span>Quantity</span>
                   <span>{totalData.total}</span>
                 </div>
                 <div className="flex justify-between">
