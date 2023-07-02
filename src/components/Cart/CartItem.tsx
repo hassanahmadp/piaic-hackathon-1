@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import {BiTrash } from 'react-icons/bi'
 import QuantityCounter from '../ProductPage/QuantityCounter'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SizeSelect from '../ProductPage/SizeSelect'
 import { useDispatch } from 'react-redux'
 import { AppDispatch, useAppSelector } from '@/store/store'
