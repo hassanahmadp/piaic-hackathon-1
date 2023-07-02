@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import toast from 'react-hot-toast'
 
 type Payload = {
   item?: CartItem
@@ -13,14 +14,20 @@ const slice = createSlice({
   reducers: {
     addToCart(state, action: PayloadAction<Payload>) {
       if (action.payload.item) {
-        const index = state.findIndex(item => item.id === action.payload.item?.id)
-        if (index >= 0) {
-          const newItem = {
-            ...state[index],
-            quantity: state[index].quantity + action.payload.item?.quantity,
+        const items = state.filter(item => item.id === action.payload.item?.id)
+        const item = items.find(item => item.size === action.payload.item?.size)
+        if (item) { 
+          if(item.size !== action.payload.item.size) {
+            state.push(action.payload.item)
+            toast.success("Product Successfully Added to Cart", { position: "bottom-center" })
+          } else {
+            toast.error("Product is already present in the Cart", { position: "bottom-center" })
+            
           }
-          state.splice(index, 1, newItem)
-        } else state.push(action.payload.item)
+        } else {
+          state.push(action.payload.item)
+          toast.success("Product Successfully Added to Cart", { position: "bottom-center" })
+        }
       }
     },
     deleteFromCart(state, action: PayloadAction<Payload>) {

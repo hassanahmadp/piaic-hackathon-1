@@ -23,12 +23,12 @@ export default function CartPage({}: Props) {
   return (
     <div className="container mx-auto px-4 my-8 h-full min-h-[25rem] relative">
       <h2 className="font-bold text-xl mb-4">Shopping Cart</h2>
-      <div className="flex justify-center h-[calc(100%-4.75rem)] flex-wrap items-center gap-8">
+      <div className={`flex justify-center h-[calc(100%-4.75rem)] flex-wrap ${cartList.length <= 0 ? 'items-center': 'items-start'} gap-8`}>
         {cartList.length <= 0 && (
           <>
             <div className="flex flex-col justify-center items-center">
               <BiShoppingBag fontSize={200}/>
-              <h1 className="font-black text-3xl mt-4">Your Shopping cart is empty</h1>
+              <h1 className="font-black text-3xl mt-4 text-center">Your Shopping cart is empty</h1>
               <Link href="/all" className="mt-4">
               <Button className="text-white hover:text-black bg-black hover:bg-white border-black border">Browse Products</Button>
               </Link>
@@ -37,7 +37,7 @@ export default function CartPage({}: Props) {
         )}
         {cartList.length > 0 && (
           <>
-            <div className="flex-[1_1_30rem] flex h-full flex-col pb-6 gap-8">
+            <div className="flex-[1_1_30rem] flex flex-col pb-6 gap-8">
               {cartList.map(item => (
                 <CartItem key={item.id} id={item.id} />
               ))}
@@ -53,7 +53,7 @@ export default function CartPage({}: Props) {
                   <span>Sub Total</span>
                   <span>${totalData.subTotal}</span>
                 </div>
-                <button className="bg-black text-white py-2 px-4 hover:text-black hover:bg-white transition-all duration-300 ease-in-out">
+                <button className="bg-black border border-black text-white py-2 px-4 hover:text-black hover:bg-white transition-all duration-300 ease-in-out">
                   Proceed to checkout
                 </button>
               </div>

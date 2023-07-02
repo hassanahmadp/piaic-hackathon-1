@@ -1,12 +1,14 @@
 "use client"
+
 import { capitalizeString } from "@/constants/utils"
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { ProductOverview } from "@/components"
 import QuantityCounter from "@/components/ProductPage/QuantityCounter"
 import { AppDispatch, useAppSelector } from "@/store/store"
 import { useDispatch } from "react-redux"
 import { addToCart } from "@/store/features"
+import toast from 'react-hot-toast'
 
 type Props = {
   params: {
@@ -26,6 +28,7 @@ export default function page({ params: { productId } }: Props) {
   const addToCartHandler = () => {
     // @ts-ignore
     dispatch(addToCart({ item: { ...product, quantity, size: selectedSize, deliveryDays: 5 } }))
+    // toast.success("Product Successfully Added to Cart", {position: 'bottom-center'})
   }
 
   const quantityHandler = (type: "inc" | "dec") => {
@@ -35,6 +38,11 @@ export default function page({ params: { productId } }: Props) {
       setQuantity(prev => (prev === 1 ? 1 : prev - 1))
     }
   }
+
+  useEffect(() => {
+    setQuantity(1)
+  }, [selectedSize])
+  
 
   return (
     <>
